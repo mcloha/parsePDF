@@ -41,7 +41,7 @@ class GoogleSheetsAPI {
             };
             await this.gsapi.spreadsheets.values.clear(opt);
         } catch (error) {
-            
+            throw error;
         }
     }
 }
