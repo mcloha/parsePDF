@@ -1,7 +1,6 @@
 <snippet>
-  <content><![CDATA[
 
-# ${1: REPORT PARSER}
+# REPORT PARSER
 
 Parse pdf report to csv using pdftotext and insert it to google spreadsheet
 
@@ -18,7 +17,5 @@ Put a pdf file into the project folder and replace the spreadSheetId, sheetName 
 
 Timbo Alvarez
 
-]]></content>
-  <tabTrigger>readme</tabTrigger>
 </snippet>
 
