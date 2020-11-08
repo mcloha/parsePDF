@@ -16,7 +16,39 @@ class GoogleSheetsAPI {
         });
         this.gsapi = google.sheets({ version: this.version, auth: this.client });
     }
-
+    async createSheet(title = 'test', sheetTitle = 'Sheet1', rightToLeft = false, emailAddress) {
+      try {
+        const opt = {
+            fields: 'spreadsheetId',
+            resource: {
+                properties: {
+                    title,
+                },
+                sheets: [
+                    {
+                        properties: {
+                            title: sheetTitle,
+                            rightToLeft
+                        }
+                    }
+                ]
+            }
+        };
+        const res = await this.gsapi.spreadsheets.create(opt);
+        const fileId = res.data.spreadsheetId;
+        await this.gdapi.permissions.create({
+            resource: {
+                type: 'user',
+                role: 'writer',
+                emailAddress,
+            },
+            fileId: fileId,
+            fields: 'id',
+        });
+        return fileId;
+    } catch (error) {
+        throw error;
+    }
     async writeToSheet(spreadsheetId, sheetName, values) {
         try {
             const opt = { 
